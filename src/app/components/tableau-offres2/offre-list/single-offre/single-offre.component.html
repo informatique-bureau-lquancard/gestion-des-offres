@@ -1,0 +1,48 @@
+
+<!--
+<li *ngIf="getBVisible()">
+    <div>
+                    Appelation : {{ getAppellation() }} -- Millésime : {{ getAnnee() }}
+                    FormatB : {{ getFormatB() }} -- Prix : {{ getPrix() }}
+                    Quantite : {{ getQuantite() }} -- Conditionnement : {{ getConditionnement() }}
+                    Commentaires : {{ getCommentaires() }}
+    </div>
+ </li>
+-->
+
+    
+<tr *ngIf="getBVisible()">
+    <td>
+        <span>{{ getAppellation() }}</span>
+    </td>
+    <td>
+        <span>{{ getAnnee() }}</span>
+    </td>   
+    <td>
+        <span>{{ getFormatB() }}</span>
+    </td>  
+    <td>
+        <span>{{ getPrix() }}</span>
+    </td> 
+    <td>
+        <span>{{ getQuantite() }}</span>
+    </td>
+    <td>
+        <span>{{ getConditionnement() }}</span>
+    </td>
+    <td>
+        <span>{{ getCommentaires() }}</span>
+    </td>
+</tr>
+
+<!--
+<div *ngIf=false>
+    <e-column field='annee' headerText='Année' width=120></e-column>
+    <e-column field='formatB' headerText='Format' textAlign='Right' format='C2' width=90></e-column>
+    <e-column field='prix' headerText='Prix' textAlign='Right' width=120></e-column>
+    <e-column field='quantite' headerText='Quantite' textAlign='Right' width=120></e-column>
+    <e-column field='conditionnement' headerText='Conditionnement' textAlign='Right' format='yMd' width=120></e-column>
+    <e-column field='commentaires' headerText='Commentaires' textAlign='Right' format='yMd' width=120></e-column>
+    <e-column field='bVisible' headerText='bVisible' textAlign='Right' format='yMd' width=120></e-column>
+</div>
+-->

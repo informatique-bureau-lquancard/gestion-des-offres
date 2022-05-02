@@ -1,0 +1,30 @@
+
+<div class="form-group">
+  <label for="status">
+    Offres
+  </label>
+  <ul class="list-group">
+      <app-single-offre *ngFor="let offre of offres; let i = index"
+      [appellation]="offre.appellation"
+      [annee]="offre.annee"
+      [formatB]="offre.formatB"
+      [prix]="offre.prix"
+      [quantite]="offre.quantite"
+      [conditionnement]="offre.conditionnement"
+      [commentaires]="offre.commentaires"
+      [bSelectionne]="offre.bSelectionne"
+
+      [idNegociant]="offre.idNegociant">
+
+      </app-single-offre>
+  </ul>
+</div>
+
+<!--
+<e-column *ngFor="let offre of dataOffres"
+  [field]='offre.field' [headerText]='offre.headerText'
+  [customAttributes]="{'data-offre-name': offre.headerText}">
+</e-column>
+-->
+
+

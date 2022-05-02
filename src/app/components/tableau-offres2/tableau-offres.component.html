@@ -1,0 +1,60 @@
+
+<!--
+<ejs-grid [dataSource]='dataOffres' [allowPaging]="true" [allowFiltering]="true" [pageSettings]='pageSettings'>
+    <e-columns>
+
+        <app-offre-list></app-offre-list>
+
+    </e-columns>
+</ejs-grid>
+-->
+
+
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="appellation">
+        <th mat-header-cell *matHeaderCellDef> Appellation </th>
+        <td mat-cell *matCellDef="let element"> {{element.appellation}} </td>
+    </ng-container>
+
+    <tr mat-header-cell *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<!--
+<table datatable class="cell-border" style="width:100%">
+    <thead>
+            <tr>
+                <th>Appelation</th>
+                <th>Année</th>  
+            </tr>
+    </thead>
+    <tbody *ngIf="offres?.length != 0" >
+
+        
+        <th *ngFor="let offre of offres">
+            <app-single-offre></app-single-offre>
+            <td>{{ offre.appellation }}</td>
+            <td>{{ offre.annee }}</td>
+            <td>
+                <a routerLink="/Person/{{person.id}}">
+                    <button class="btn btn-primary pull-right"> Voir détail</button>
+                </a>
+                <a routerLink="fenetre-test">
+                    <button class="btn btn-primary pull-right"> Voir détail</button>
+                </a>
+            </td>
+
+            <td *ngFor="let valeur of person">
+
+            </td>
+    </th>
+        
+    </tbody>
+    <tbody *ngIf="offres?.length == 0">
+        <tr>
+                <td colspan="4" class="no-data-available"Sans données !></td>
+        </tr>
+    <tbody>
+</table>
+-->

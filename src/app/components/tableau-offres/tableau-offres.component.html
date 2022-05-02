@@ -1,0 +1,93 @@
+<div class="mat-elevation-z8">
+  
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+
+    <ng-container matColumnDef="selection">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Selection</th>
+      <td mat-cell *matCellDef="let row">
+        <!--
+        <mat-checkbox class="checkbox"></mat-checkbox>
+        -->
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="appellation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Appellation</th>
+      <td mat-cell *matCellDef="let row">{{row.appellation}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="annee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Année</th>
+      <td mat-cell *matCellDef="let row">{{row.annee}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="formatB">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Format</th>
+      <td mat-cell *matCellDef="let row">{{row.formatB}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="prix">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Prix</th>
+      <td mat-cell *matCellDef="let row">{{row.prix}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantite">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantité</th>
+      <td mat-cell *matCellDef="let row">{{row.quantite}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="conditionnement">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Conditionnement</th>
+      <td mat-cell *matCellDef="let row">{{row.conditionnement}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="commentaires">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Commentaires</th>
+      <td mat-cell *matCellDef="let row">{{row.commentaires}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="operations">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Opérations</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-mini-fab disabled aria-label="Enregistrer">
+          <mat-icon>unarchive</mat-icon>
+        </button>
+        <button mat-mini-fab disabled aria-label="Supprimer">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!--
+    <ng-container matColumnDef="bSelectionne">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sélection</th>
+      <td mat-cell *matCellDef="let row">{{row.bSelectionne}}</td>
+    </ng-container>
+    -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr *matRowDef="let offre; columns: displayedColumns;"
+    
+      mat-row [hidden]=!offre.bSelectionne
+
+      [ngClass]="{ 'selected': offre === offreSelectionne }"
+    
+      (click)="onSelectionnerLigne(offre)">
+      
+    </tr>
+  </table>
+
+<mat-paginator #paginator
+      [length]="dataSource?.offres?.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>

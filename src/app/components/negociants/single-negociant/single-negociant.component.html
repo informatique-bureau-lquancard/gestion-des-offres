@@ -1,0 +1,23 @@
+
+
+<li>
+    <div class="btn-toolbar" style="width: 100%;">
+        <button class="btn btn-transparent" (click)="onSelectionnerNegociant()">
+            <h4 [ngStyle]="{color: getColor()}">
+                    Nom : {{ getNom() }} -- Source : {{ getSource() }} -- Dernière modification : {{ getDateMAJ() }}
+            </h4>
+        </button>
+      </div>
+ </li>
+
+<!--
+<div *ngIf=false>
+    <e-column field='annee' headerText='Année' width=120></e-column>
+    <e-column field='formatB' headerText='Format' textAlign='Right' format='C2' width=90></e-column>
+    <e-column field='prix' headerText='Prix' textAlign='Right' width=120></e-column>
+    <e-column field='quantite' headerText='Quantite' textAlign='Right' width=120></e-column>
+    <e-column field='conditionnement' headerText='Conditionnement' textAlign='Right' format='yMd' width=120></e-column>
+    <e-column field='commentaires' headerText='Commentaires' textAlign='Right' format='yMd' width=120></e-column>
+    <e-column field='bVisible' headerText='bVisible' textAlign='Right' format='yMd' width=120></e-column>
+</div>
+-->
