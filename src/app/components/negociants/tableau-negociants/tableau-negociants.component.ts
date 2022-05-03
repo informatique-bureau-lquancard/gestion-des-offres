@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -23,10 +24,15 @@ export class TableauNegociantsComponent extends NegociantListComponent implement
   // displayedColumns = ['id', 'negociantName', 'source', 'dateDerniereMAJ', 'bSelectionne'];
   displayedColumns = ['id', 'negociantName', 'source', 'dateDerniereMAJ'];
 
-  constructor(protected negociantsService: NegociantsService) {
+  constructor(protected negociantsService: NegociantsService, private httpClient: HttpClient) {
     super(negociantsService);
-    this.dataSource = new TableauNegociantsDataSource();
+    this.dataSource = new TableauNegociantsDataSource(httpClient);
   }
+
+  // constructor(protected negociantsService: NegociantsService) {
+  //   super(negociantsService);
+  //   this.dataSource = new TableauNegociantsDataSource();
+  // }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

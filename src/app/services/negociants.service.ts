@@ -2,14 +2,16 @@ import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
+import { DataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
+// import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 import { OffresService } from './offres.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NegociantsService {
-  private negociants = dataNegociants
+  // private negociants = dataNegociants
+  private negociants = new DataNegociants(this.httpClient).getNegociants();
 
   negociantsSubject = new Subject<any[]>();
 
@@ -28,7 +30,7 @@ export class NegociantsService {
     for(let negociant of this.negociants) {
       negociant.bSelectionne = true,
 
-      negociant.tableau.forEach(element => {
+      negociant.tableauOffres.forEach((element: number) => {
         this.offresService.getOffreById(element)?.setBSelectionne(true)
       });
 
@@ -39,7 +41,7 @@ export class NegociantsService {
   switchOffAll(){
     for(let negociant of this.negociants) {
 
-      negociant.tableau.forEach(element => {
+      negociant.tableauOffres.forEach((element: number) => {
         this.offresService.getOffreById(element)?.setBSelectionne(false)
       });
 
@@ -53,7 +55,7 @@ export class NegociantsService {
     this.negociants[index].bSelectionne = true,
     this.emitNegociantsSubject;
 
-    this.negociants[index].tableau.forEach(element => {
+    this.negociants[index].tableauOffres.forEach((element: number) => {
       this.offresService.getOffreById(element)?.setBSelectionne(true)
     });
 

@@ -4,21 +4,29 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Negociant } from 'src/app/models/Negociant.model';
-import { dataNegociants } from './dataNegociants';
+import { HttpClient } from '@angular/common/http';
+import { DataNegociants } from './dataNegociants';
+// import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 
 /**
  * Data source for the TableauNegociants view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
+
 export class TableauNegociantsDataSource extends DataSource<Negociant> {
-  negociants: Negociant[] = dataNegociants;
+  // private negociants = dataNegociants
+  public negociants = new DataNegociants(this.httpClient).getNegociants();
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     super();
   }
+
+  // constructor() {
+  //   super();
+  // }
 
   /**
    * Connect this data source to the table. The table will only update when
