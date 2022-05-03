@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
+import { NegociantAffiche } from '../models/NegociantAffiche.model';
 // import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 import { OffresService } from './offres.service';
 

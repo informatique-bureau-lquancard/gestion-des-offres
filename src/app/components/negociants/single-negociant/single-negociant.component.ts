@@ -8,22 +8,22 @@ import { NegociantsService } from 'src/app/services/negociants.service';
 })
 
 export class SingleNegociantComponent implements OnInit {
-  @Input() negociantName!: string;
+  @Input() nom!: string;
   @Input() source!: string;
   //A changer en date
-  @Input() dateDerniereMAJ!: Date;
+  @Input() date_maj!: Date;
   @Input() bSelectionne!: boolean;
   
   @Input() indexOfNegociant!: number;
   @Input() id!: number;
 
-  constructor(private negociantsService: NegociantsService) { }
+  constructor(private negociantsService: NegociantsService) {}
 
   ngOnInit(): void {
   }
 
   getNom(){
-    return this.negociantName;
+    return this.nom;
   }
 
   getSource(){
@@ -31,7 +31,7 @@ export class SingleNegociantComponent implements OnInit {
   }
 
   getDateMAJ(){
-    return this.dateDerniereMAJ;
+    return this.date_maj;
   }
 
   getStatus(){

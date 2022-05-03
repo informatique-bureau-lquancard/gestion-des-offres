@@ -16,12 +16,24 @@
     <ul class="list-group">
         <app-single-negociant *ngFor="let negociant of negociants; let i = index"
           [indexOfNegociant]="i"
-          [negociantName]="negociant.negociantName"
+          [nom]="negociant.nom"
           [source]="negociant.source"
-          [dateDerniereMAJ]="negociant.dateDerniereMAJ"
+          [date_maj]="negociant.date_maj"
           [bSelectionne]="negociant.bSelectionne"
           [id]="negociant.id">
         </app-single-negociant>
+
+        <!-- <app-single-negociant *ngFor="let negociant of negociants; let i = index"
+          [indexOfNegociant]="i"
+          [pays_id]="negociant.pays_id"
+          [type_partenaire_id]="negociant.type_partenaire_id"
+          [nom]="negociant.nom"
+          [source]="negociant.source"
+          [date_maj]="negociant.date_maj"
+          [date_crea]="negociant.date_crea"
+          [bSelectionne]="negociant.bSelectionne"
+          [id]="negociant.id">
+        </app-single-negociant> -->
     
     </ul>
 <!--

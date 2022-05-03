@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Negociant } from 'src/app/models/Negociant.model';
+import { NegociantAffiche } from 'src/app/models/NegociantAffiche.model';
 import { NegociantsService } from '../../../services/negociants.service';
 
 @Component({
@@ -11,14 +11,14 @@ import { NegociantsService } from '../../../services/negociants.service';
 })
 export class NegociantListComponent implements OnInit {
 
-  negociants!: any[];
+  negociants!: NegociantAffiche[];
   negociantSubscription!: Subscription;
 
   constructor(protected negociantsService: NegociantsService) { }
 
     // public getNegociants(): void {
   //   this.negociantsService.getNegociants().subscribe(
-  //     (response: Negociant[]) => {
+  //     (response: NegociantAffiche[]) => {
   //       this.negociants = response;
   //     },
   //     (error: HttpErrorResponse) => {
@@ -30,7 +30,7 @@ export class NegociantListComponent implements OnInit {
   public getNegociants(): void {
     this.negociantSubscription = this.negociantsService.negociantsSubject
     .subscribe(
-      (response: Negociant[]) => {
+      (response: NegociantAffiche[]) => {
         this.negociants = response;
       },
       (error: HttpErrorResponse) => {

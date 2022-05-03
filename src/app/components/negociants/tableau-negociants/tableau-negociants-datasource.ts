@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { Negociant } from 'src/app/models/Negociant.model';
+import { NegociantAffiche } from 'src/app/models/NegociantAffiche.model';
 import { HttpClient } from '@angular/common/http';
 import { DataNegociants } from './dataNegociants';
 // import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
@@ -14,7 +14,7 @@ import { DataNegociants } from './dataNegociants';
  * (including sorting, pagination, and filtering).
  */
 
-export class TableauNegociantsDataSource extends DataSource<Negociant> {
+export class TableauNegociantsDataSource extends DataSource<NegociantAffiche> {
   // private negociants = dataNegociants
   public negociants = new DataNegociants(this.httpClient).getNegociants();
   paginator: MatPaginator | undefined;
@@ -33,7 +33,7 @@ export class TableauNegociantsDataSource extends DataSource<Negociant> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Negociant[]> {
+  connect(): Observable<NegociantAffiche[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
@@ -56,7 +56,7 @@ export class TableauNegociantsDataSource extends DataSource<Negociant> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(negociants: Negociant[]): Negociant[] {
+  private getPagedData(negociants: NegociantAffiche[]): NegociantAffiche[] {
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return negociants.splice(startIndex, this.paginator.pageSize);
@@ -69,7 +69,7 @@ export class TableauNegociantsDataSource extends DataSource<Negociant> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(negociants: Negociant[]): Negociant[] {
+  private getSortedData(negociants: NegociantAffiche[]): NegociantAffiche[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return negociants;
     }
@@ -77,7 +77,7 @@ export class TableauNegociantsDataSource extends DataSource<Negociant> {
     return negociants.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'negociantName': return compare(a.negociantName, b.negociantName, isAsc);
+        case 'nom': return compare(a.nom, b.nom, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         default: return 0;
       }

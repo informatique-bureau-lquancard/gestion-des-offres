@@ -2,67 +2,104 @@ import { formatDate } from "@angular/common";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { Negociant } from "src/app/models/Negociant.model";
+import { NegociantAffiche } from "src/app/models/NegociantAffiche.model";
+import { NegociantBase } from "src/app/models/NegociantBase.model";
 
 const dateJour = new Date();
 
-// export let dataNegociants: Negociant[] = [
-//   new Negociant(1, 1, 1, "1", "1", new Date(), new Date(), false, [1,2]),
-//   new Negociant(2, 1, 1, "2", "2", new Date(), new Date(), false, [1]),
-//   new Negociant(3, 1, 1, "3", "3", new Date(), new Date(), false, [1,2,3]),
-//   new Negociant(2, 1, 1, "4", "4", new Date(), new Date(), false, [2])
-// ];
-
-  // export let dataNegociants: Negociant[] = [];
+  // export let dataNegociants: NegociantAffiche[] = [];
   @Component({
     template: ''
   })
   export class DataNegociants implements OnInit {
 
-    // private negociants: Negociant[] = [];
+    private negociants: NegociantAffiche[] = [];
+    // private negociants2: NegociantBase[] = [];
  
-    private negociants: Negociant[] = [
-      new Negociant(1, 1, 1, "1", "1", new Date(), new Date(), false, [1,2]),
-      new Negociant(2, 1, 1, "2", "2", new Date(), new Date(), false, [1]),
-      new Negociant(3, 1, 1, "3", "3", new Date(), new Date(), false, [1,2,3]),
-      new Negociant(2, 1, 1, "4", "4", new Date(), new Date(), false, [2])
+    private negociants2: NegociantAffiche[] = [
+      new NegociantAffiche(1, 1, 1, "1", "1", new Date(), new Date(), false, [1,2]),
+      new NegociantAffiche(2, 1, 1, "2", "2", new Date(), new Date(), false, [1]),
+      new NegociantAffiche(3, 1, 1, "3", "3", new Date(), new Date(), false, [1,2,3]),
+      new NegociantAffiche(2, 1, 1, "4", "4", new Date(), new Date(), false, [2])
     ];
-
-    // private negociants2: Negociant[] = [
-    //   new Negociant(1, 1, 1, "1", "1", new Date(), new Date(), false, [1,2]),
-    //   new Negociant(2, 1, 1, "2", "2", new Date(), new Date(), false, [1]),
-    //   new Negociant(3, 1, 1, "3", "3", new Date(), new Date(), false, [1,2,3]),
-    //   new Negociant(2, 1, 1, "4", "4", new Date(), new Date(), false, [2])
-    // ];
-
-    private negociants2: Negociant[] = [];
 
     private apiServeurUrl = `http://127.0.0.1:8080`;
 
-    constructor(private httpClient : HttpClient) {}
-
-    ngOnInit(): void {
-      // this.getNegociants1();
+    constructor(private httpClient : HttpClient) {
+      console.log("Passe dans constructor")
+      // Marche
       this.setNegociants(this.negociants2);
+
+      // this.getNegociants1();
     }
 
-    public getNegociants(): Negociant[] {
+    //Ne fonctionne pas
+    ngOnInit(): void {
+      console.log("Passe dans init")
+      // this.getNegociants1();
+      // this.setNegociants(this.negociants2);
+    }
+
+    public getNegociants(): NegociantAffiche[] {
       return this.negociants;
     }
 
-    public setNegociants(negociants : Negociant[]): void {
-      this.negociants = negociants;
+    // Mettre héritage ou décorateur pour les négociants en entrée
+    public setNegociants(negociants0 : NegociantBase[]): void {
+
+      this.negociants = [];
+
+      negociants0.forEach(element => {
+
+        this.negociants.push(
+          new NegociantAffiche(
+            element.id,
+            Number(element.pays_id),
+            Number(element.type_partenaire_id),
+            element.nom,
+            "source",
+            // element.date_maj,
+            // element.date_crea,
+            dateJour,
+            dateJour,
+            false,
+            [2]
+          )
+        );
+      });
+
+      // this.negociants = negociants;
+
+      //showAll(negociants : NegociantAffiche[]) : Fonctionnalité à déplacer !!!
+      this.negociants.forEach(element => {
+  
+        console.log(element);
+      });
+
+      this.negociants = this.negociants2;
+
+      this.negociants.forEach(element => {
+  
+        console.log(element);
+      });
+
     }
 
     public getNegociants1(): void {
     
       this.getNegociants2().subscribe(
-      (response: Negociant[]) => {
+      (response: NegociantBase[]) => {
+        // Récupère les négociants mais pas dans le bon format
 
-        console.log( "réponse : " + response);
+        //showAll(negociants : NegociantAffiche[]) : Fonctionnalité à déplacer !!!
+        response.forEach(element => {
+  
+          console.log(element);
+        });
+
         console.log( "type : " + typeof(response) );
 
-        this.negociants = response;
+        this.setNegociants(response);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -70,11 +107,9 @@ const dateJour = new Date();
     )
   }
 
-  getNegociants2(): Observable<Negociant[]> {
+  getNegociants2(): Observable<NegociantAffiche[]> {
 
-    // AppRoutingModule.apiServeurUrl
-    // return this.httpClient.get<Negociant[]>( this.apiServeurUrl + `/partenaire/all`, { headers } );
-    return this.httpClient.get<Negociant[]>( this.apiServeurUrl + `/partenaire/all`);
+    return this.httpClient.get<NegociantAffiche[]>( this.apiServeurUrl + `/partenaire/all`);
   }
 }
 

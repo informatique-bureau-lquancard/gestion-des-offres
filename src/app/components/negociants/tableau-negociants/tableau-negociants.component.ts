@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { Negociant } from 'src/app/models/Negociant.model';
+import { NegociantAffiche } from 'src/app/models/NegociantAffiche.model';
 import { NegociantsService } from 'src/app/services/negociants.service';
 import { NegociantListComponent } from '../negociant-list/negociant-list.component';
 import { TableauNegociantsDataSource} from './tableau-negociants-datasource';
@@ -17,7 +17,7 @@ import { TableauNegociantsDataSource} from './tableau-negociants-datasource';
 export class TableauNegociantsComponent extends NegociantListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<Negociant>;
+  @ViewChild(MatTable) table!: MatTable<NegociantAffiche>;
   dataSource: TableauNegociantsDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -40,9 +40,9 @@ export class TableauNegociantsComponent extends NegociantListComponent implement
     this.table.dataSource = this.dataSource;
   }
 
-  negociantSelectionne!: Negociant
+  negociantSelectionne!: NegociantAffiche
 
-  onSelectionnerLigne(negociant: Negociant) {
+  onSelectionnerLigne(negociant: NegociantAffiche) {
 
     this.onSelectionnerNegociant(negociant.id)
     this.negociantSelectionne = negociant;
