@@ -20,7 +20,7 @@ const dateJour = new Date();
   export class DataNegociants implements OnInit {
 
     // private negociants: Negociant[] = [];
-
+ 
     private negociants: Negociant[] = [
       new Negociant(1, 1, 1, "1", "1", new Date(), new Date(), false, [1,2]),
       new Negociant(2, 1, 1, "2", "2", new Date(), new Date(), false, [1]),
