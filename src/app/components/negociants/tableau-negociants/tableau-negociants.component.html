@@ -20,7 +20,7 @@
 
     <ng-container matColumnDef="negociantName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Négociant</th>
-      <td mat-cell *matCellDef="let row">{{row.negociantName}}</td>
+      <td mat-cell *matCellDef="let row">{{row.nom}}</td>
     </ng-container>
   
     <ng-container matColumnDef="source">
@@ -30,7 +30,7 @@
 
     <ng-container matColumnDef="dateDerniereMAJ">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Dernière MAJ</th>
-      <td mat-cell *matCellDef="let row">{{row.dateDerniereMAJ}}</td>
+      <td mat-cell *matCellDef="let row">{{row.date_maj}}</td>
     </ng-container>
     
 <!--

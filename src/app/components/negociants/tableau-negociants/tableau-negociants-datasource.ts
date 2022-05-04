@@ -6,6 +6,7 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 import { NegociantAffiche } from 'src/app/models/NegociantAffiche.model';
 import { HttpClient } from '@angular/common/http';
 import { DataNegociants } from './dataNegociants';
+import { NegociantsService } from 'src/app/services/negociants.service';
 // import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 
 /**
@@ -15,7 +16,7 @@ import { DataNegociants } from './dataNegociants';
  */
 
 export class TableauNegociantsDataSource extends DataSource<NegociantAffiche> {
-  // private negociants = dataNegociants
+
   public negociants = new DataNegociants(this.httpClient).getNegociants();
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
@@ -24,7 +25,7 @@ export class TableauNegociantsDataSource extends DataSource<NegociantAffiche> {
     super();
   }
 
-  // constructor() {
+  // constructor(private httpClient: HttpClient, protected negociantsService: NegociantsService) {
   //   super();
   // }
 
@@ -37,8 +38,13 @@ export class TableauNegociantsDataSource extends DataSource<NegociantAffiche> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
+
+      // return merge(observableOf(this.negociantsService.negociants), this.paginator.page, this.sort.sortChange)
+
       return merge(observableOf(this.negociants), this.paginator.page, this.sort.sortChange)
         .pipe(map(() => {
+
+          // return this.getPagedData(this.getSortedData([...this.negociantsService.negociants ]));
           return this.getPagedData(this.getSortedData([...this.negociants ]));
         }));
     } else {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
+import { TableauNegociantsDataSource } from '../components/negociants/tableau-negociants/tableau-negociants-datasource';
 import { NegociantAffiche } from '../models/NegociantAffiche.model';
 // import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 import { OffresService } from './offres.service';
@@ -11,8 +12,10 @@ import { OffresService } from './offres.service';
   providedIn: 'root'
 })
 export class NegociantsService {
-  // private negociants = dataNegociants
-  private negociants = new DataNegociants(this.httpClient).getNegociants();
+
+  public negociants = new DataNegociants(this.httpClient).getNegociants();
+  
+  // public negociants = new TableauNegociantsDataSource(this.httpClient).negociants;
 
   negociantsSubject = new Subject<any[]>();
 

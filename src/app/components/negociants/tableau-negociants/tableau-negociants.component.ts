@@ -26,7 +26,14 @@ export class TableauNegociantsComponent extends NegociantListComponent implement
 
   constructor(protected negociantsService: NegociantsService, private httpClient: HttpClient) {
     super(negociantsService);
+
+    // this.negociants.forEach(element => {
+  
+    //   console.log(element);
+    // });
+    
     this.dataSource = new TableauNegociantsDataSource(httpClient);
+    // this.dataSource = new TableauNegociantsDataSource(httpClient, negociantsService);
   }
 
   // constructor(protected negociantsService: NegociantsService) {
