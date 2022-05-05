@@ -1,4 +1,7 @@
-import { Offre } from "src/app/models/Offre.model";
+import { Offre } from "src/app/models/OffreAffiche.model";
+
+const dateJour = new Date();
+
 
     export let dataOffres: Offre[] = [
       new Offre(1, 1, "1", 2021, "BO", 10, 5, "CBO6", "com1", false),

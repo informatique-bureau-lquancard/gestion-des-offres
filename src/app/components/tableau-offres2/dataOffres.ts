@@ -1,4 +1,4 @@
-import { Offre } from "src/app/models/Offre.model";
+import { Offre } from "src/app/models/OffreAffiche.model";
 
 let offre1 = new Offre(1, 1, "1", 2021, "BO", 10, 5, "CBO6", "com1", false)
 let offre2 = new Offre(2, 2, "2", 2021, "BO", 10, 5, "CBO6", "com1", false)

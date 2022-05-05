@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { data } from './datasource';
 import { PageSettingsModel } from '@syncfusion/ej2-grids';
 import { Subscription } from 'rxjs';
-import { Offre } from 'src/app/models/Offre.model';
+import { Offre } from 'src/app/models/OffreAffiche.model';
 import { OffresService } from 'src/app/services/offres.service';
 import { PeriodicElement } from './PeriodicElement.model';
 // import { tableauDataOffres } from './dataOffres';

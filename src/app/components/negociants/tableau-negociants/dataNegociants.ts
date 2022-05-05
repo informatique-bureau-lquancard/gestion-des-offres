@@ -1,169 +1,135 @@
 import { formatDate } from "@angular/common";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { waitForAsync } from "@angular/core/testing";
-import { Observable } from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { tap } from "rxjs/operators";
 import { NegociantAffiche } from "src/app/models/NegociantAffiche.model";
 import { NegociantBase } from "src/app/models/NegociantBase.model";
+import { environment } from "src/environments/environment";
 
-const dateJour = new Date();
-
-// export let dataNegociants: NegociantAffiche[] = [];
 @Component({
   template: ''
 })
-// export class DataNegociants implements OnInit {
-export class DataNegociants {
+export class DataNegociants implements OnDestroy {
 
-  private negociants: NegociantAffiche[] = [];
-  private negociantsBase: NegociantBase[] = [];
+  static negociants: NegociantAffiche[];
+  static negociantsBase: NegociantBase[];
 
-  // private negociantsBase: NegociantBase[] = [
-  //   new NegociantBase(1, 1, 1, "1", dateJour, dateJour),
-  //   new NegociantBase(2, 1, 1, "2", dateJour, dateJour),
-  //   new NegociantBase(3, 1, 1, "3", dateJour, dateJour),
-  //   new NegociantBase(2, 1, 1, "4", dateJour, dateJour)
-  // ];
-
-  private apiServeurUrl = `http://127.0.0.1:8080`;
+  private apiServeurUrl = environment.apiServeurUrl;
 
   constructor(private httpClient: HttpClient) {
-    console.log("1 Passe dans constructor")
+    console.log("Passe dans constructor")
 
-    // Marche
-    // this.init(this.negociantsBase);
+    if( DataNegociants.negociants != null ) {
+      console.log("Il y a déjà des éléments dans negociants");
+      console.log("Taille negociants !! : " + DataNegociants.negociants.length)
+      return;
+    }
 
-    this.getNegociants1();
-    this.init();
+    DataNegociants.negociants = [];
+    DataNegociants.negociantsBase = [];
+
+    this.initialisation();
   }
 
-  public getNegociants1(): void {
+  ngOnDestroy(): void {
+    // this.subscription.unsubscribe();
+  }
 
+  private initialisation() {
 
-    this.getNegociants2().subscribe(
-      (response: any[]) => {
-        // Récupère les négociants mais pas dans le bon format
+    // DataNegociants.negociantsBase = [
+    //   new NegociantBase(1, 1, 1, "1", new Date(), new Date()),
+    //   new NegociantBase(2, 1, 1, "2", new Date(), new Date()),
+    //   new NegociantBase(3, 1, 1, "3", new Date(), new Date()),
+    //   new NegociantBase(2, 1, 1, "4", new Date(), new Date())
+    // ];
+    
+    this.initialisationBase();
 
-        //showAll(negociants : NegociantAffiche[]) : Fonctionnalité à déplacer !!!
-        // response.forEach(element => {
+    setTimeout(()=>{
+    console.log("3 Après getNegociants1 ");
 
-        //   console.log("2 Element base : " + element.nom);
+    console.log(DataNegociants.negociantsBase);
 
-        //   this.negociantsBase.push(
-        //     new NegociantBase(
-        //       element.id,
-        //       // Number(element.pays_id),
-        //       // Number(element.type_partenaire_id),
-        //       1,
-        //       1,
-        //       element.nom,
-        //       element.date_maj,
-        //       element.date_crea
-        //     )
-        //   );
-        // });
+    DataNegociants.negociantsBase.forEach(element => {
 
-        negociantBase : NegociantBase;
+      console.log("Element negociation base : " + element.nom);
+    });
 
-        response.forEach(function (value) {
+    this.init();
 
-          
-          new NegociantBase(
-              value.id,
-              // Number(element.pays_id),
-              // Number(element.type_partenaire_id),
-              1,
-              1,
-              value.nom,
-              value.date_maj,
-              value.date_crea
+    },5000);
+  }
+
+  public initialisationBase(): void {
+
+    this.getObservableNegociants().subscribe(
+      (response: NegociantBase[]) => {
+
+        response.forEach(element => {
+
+          console.log("Element base : " + element.nom);
+
+          DataNegociants.negociantsBase.push(
+            new NegociantBase(
+              element.id,
+              Number(element.pays_id),
+              Number(element.type_partenaire_id),
+              element.nom,
+              element.date_maj,
+              element.date_crea
             )
+          );
 
-            console.log("2 Element base : " + value.nom);
+          console.log("1 Taille negociants !! : " + DataNegociants.negociants.length);
+
         });
 
-        console.log("2 Element base : " +  this.negociantsBase.length);
-
-        //   this.negociantsBase.push(
-        //     new NegociantBase(
-        //       element.id,
-        //       // Number(element.pays_id),
-        //       // Number(element.type_partenaire_id),
-        //       1,
-        //       1,
-        //       element.nom,
-        //       element.date_maj,
-        //       element.date_crea
-        //     )
-        //   );
-        // });
-
-        console.log("3 Apres negociant base")
-
         // this.setNegociantsBase(response);
+        console.log("2 Taille negociants !! : " + DataNegociants.negociants.length);
       },
       (error: HttpErrorResponse) => {
+        console.log("Erreurs !!")
         alert(error.message);
       }
+       
     )
-
-    setTimeout(function(){
-      console.log("4 I am the third log after 2 seconds");
-    },2000)
-
-    console.log("3,1 Apres negociant base, taille : " + this.negociantsBase.length)
 
   }
 
-  getNegociants2(): Observable<NegociantBase[]> {
+  getObservableNegociants(): Observable<NegociantAffiche[]> {
 
-    return this.httpClient.get<NegociantBase[]>(this.apiServeurUrl + `/partenaire/all`);
+    return this.httpClient.get<NegociantAffiche[]>(this.apiServeurUrl + `/partenaire/all`)
+    .pipe(
+      tap(data =>
+        console.log('All: ' + JSON.stringify(data))));
   }
 
   public init(): void {
 
-    this.negociants = [];
-
-    console.log("5 Taille negociants base : " + this.negociantsBase.length);
+    console.log("Taille negociants base : " + DataNegociants.negociants.length);
 
     //showAll(negociants : NegociantAffiche[]) : Fonctionnalité à déplacer !!!
-    this.negociantsBase.forEach(element => {
+    DataNegociants.negociantsBase.forEach(element => {
 
-      console.log("6 Element negociation base 2 : " + element.nom);
+      console.log("Element negociation base : " + element);
     });
 
-    console.log("7 Taille negociants base : 2 " + this.negociants.length);
+    console.log("this.negociantsBase.length :" + DataNegociants.negociantsBase.length);
 
-
-    this.negociants.push(
-
-      new NegociantAffiche(
-        1,
-        // Number(element.pays_id),
-        // Number(element.type_partenaire_id),
-        1,
-        1,
-        "element.nom",
-        "source",
-        dateJour,
-        dateJour,
-        false,
-        [2]
-      )
-    );
-
-    console.log("8 this.negociantsBase.length :" + this.negociantsBase.length);
-
-    this.negociantsBase.forEach(
+    DataNegociants.negociantsBase.forEach(
       element => {
 
-        this.negociants.push(
+        if( element.id == 1 ) {
+          return;
+        }
+
+        DataNegociants.negociants.push(
           new NegociantAffiche(
             element.id,
-            // Number(element.pays_id),
-            // Number(element.type_partenaire_id),
-            1,
-            1,
+            Number(element.pays_id),
+            Number(element.type_partenaire_id),
             element.nom,
             "source",
             element.date_maj,
@@ -174,29 +140,27 @@ export class DataNegociants {
         );
       });
 
-    console.log("9 Taille negociants : " + this.negociants.length);
+    console.log("Taille negociants : " + DataNegociants.negociants.length);
 
     //showAll(negociants : NegociantAffiche[]) : Fonctionnalité à déplacer !!!
-    this.negociants.forEach(element => {
+    DataNegociants.negociants.forEach(element => {
 
       console.log(element);
     });
   }
 
-  // //Ne fonctionne pas
-  // ngOnInit(): void {
-  //   console.log("Passe dans init")
-  // }
-
-  public getNegociants(): NegociantAffiche[] {
-    return this.negociants;
+  public getNegociantsAffiche(): NegociantAffiche[] {
+    return DataNegociants.negociants;
   }
 
-  // // Mettre héritage ou décorateur pour les négociants en entrée
-  // public setNegociantsBase(negociantsBase : NegociantBase[]): void {
-  //   this.negociantsBase = negociantsBase;
+  // async callerFun(){
+  //   console.log("Caller");
+  //   await this.getObservableNegociants();
+  //   console.log("After waiting");
   // }
-
-
 }
+
+
+
+
 

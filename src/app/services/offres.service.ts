@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { dataOffres } from '../components/tableau-offres/dataOffres';
-import { Offre } from '../models/Offre.model';
+import { Offre } from '../models/OffreAffiche.model';
 
 @Injectable({
   providedIn: 'root'

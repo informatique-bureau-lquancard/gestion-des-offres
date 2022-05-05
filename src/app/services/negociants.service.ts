@@ -13,13 +13,15 @@ import { OffresService } from './offres.service';
 })
 export class NegociantsService {
 
-  public negociants = new DataNegociants(this.httpClient).getNegociants();
+  public negociants = new DataNegociants(this.httpClient).getNegociantsAffiche();
   
   // public negociants = new TableauNegociantsDataSource(this.httpClient).negociants;
 
   negociantsSubject = new Subject<any[]>();
 
-  constructor(private offresService: OffresService, private httpClient: HttpClient) { }
+  constructor(private offresService: OffresService, private httpClient: HttpClient) { 
+    console.log("NegociantsService");
+  }
 
   getNegociantById(id: number){
     const negociant = this.negociants.find(

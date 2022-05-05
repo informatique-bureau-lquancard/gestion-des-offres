@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, Subscription } from 'rxjs';
-import { Offre } from 'src/app/models/Offre.model';
+import { Offre } from 'src/app/models/OffreAffiche.model';
 import { dataOffres } from './dataOffres';
 
 

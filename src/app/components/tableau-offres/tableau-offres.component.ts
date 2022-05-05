@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { RowHighlightPosition } from 'ag-grid-community';
-import { Offre } from 'src/app/models/Offre.model';
+import { Offre } from 'src/app/models/OffreAffiche.model';
 import { TableauOffresDataSource } from './tableau-offres-datasource';
 
 @Component({
