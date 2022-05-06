@@ -1,6 +1,8 @@
+import { DatePipe, formatDate } from "@angular/common";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy } from "@angular/core";
 import { Observable } from "rxjs";
+import { Timestamp } from "rxjs/internal/operators/timestamp";
 import { tap } from "rxjs/operators";
 import { OffreAffiche } from "src/app/models/OffreAffiche.model";
 import { OffreBase } from "src/app/models/OffreBase.model";
@@ -42,10 +44,10 @@ export class DataOffres implements OnDestroy {
   private initialisation() {
 
     // DataOffres.offresBase = [
-    //   new OffreBase(1, 1, 1, 1, 1, 1, "1", dateJour, dateJour),
-    //   new OffreBase(2, 2, 2, 2, 2, 2, "2", dateJour, dateJour),
-    //   new OffreBase(3, 3, 3, 3, 3, 3, "3", dateJour, dateJour),
-    //   new OffreBase(4, 4, 4, 4, 4, 4, "4", dateJour, dateJour)
+    //   new OffreBase(1, "1", "1", 1, "1", 1, 1.1, "1", "1", dateJour, dateJour),
+    //   new OffreBase(2, "2", "2", 2, "2", 2, 2.2, "2", "2", dateJour, dateJour),
+    //   new OffreBase(3, "3", "3", 3, "3", 3, 3.3, "3", "3", dateJour, dateJour),
+    //   new OffreBase(4, "4", "4", 4, "4", 4, 4.4, "4", "4", dateJour, dateJour)
     // ];
     
     this.initialisationBase();
@@ -74,14 +76,19 @@ export class DataOffres implements OnDestroy {
 
           console.log("Element base : " + element.id);
 
+          console.log("Type : " + typeof(element.date_maj));
+
           DataOffres.offresBase.push(
+
             new OffreBase(
               element.id,
-              Number(element.partenaire_vendeur_id),
-              Number(element.vin_id),
-              Number(element.millesime_id),
-              Number(element.format_id),
-              Number(element.conditionnement_id),
+              element.partenaire,
+              element.vin,
+              Number(element.millesime),
+              element.format,
+              Number(element.quantite),
+              Number(element.prix),
+              element.conditionnement,
               element.commentaires,
               element.date_maj,
               element.date_crea
@@ -106,7 +113,7 @@ export class DataOffres implements OnDestroy {
 
   getObservableNegociants(): Observable<OffreAffiche[]> {
 
-    return this.httpClient.get<OffreAffiche[]>(this.apiServeurUrl + `/stock_offres/all`)
+    return this.httpClient.get<OffreAffiche[]>(this.apiServeurUrl + `/offres_view/all`)
     .pipe(
       tap(data =>
         console.log('All: ' + JSON.stringify(data))));
@@ -134,11 +141,13 @@ export class DataOffres implements OnDestroy {
         DataOffres.offres.push(
           new OffreAffiche(
             element.id,
-            Number(element.partenaire_vendeur_id),
-            Number(element.vin_id),
-            Number(element.millesime_id),
-            Number(element.format_id),
-            Number(element.conditionnement_id),
+            element.partenaire,
+            element.vin, 
+            Number(element.millesime),
+            element.format,
+            Number(element.quantite),
+            Number(element.prix),
+            element.conditionnement,
             element.commentaires,
             element.date_maj,
             element.date_crea,
@@ -169,3 +178,7 @@ export class DataOffres implements OnDestroy {
   //   console.log("After waiting");
   // }
 }
+function moment(date_maj: Date) {
+  throw new Error("Function not implemented.");
+}
+

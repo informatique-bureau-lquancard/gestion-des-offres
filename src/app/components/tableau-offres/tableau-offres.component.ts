@@ -20,7 +20,7 @@ export class TableauOffresComponent implements AfterViewInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   // displayedColumns = ['id', 'appellation', 'annee', 'formatB', 'prix', 'quantite', 'conditionnement', 'commentaires', 'bSelectionne'];
-  displayedColumns = ['selection', 'id', 'partenaire_vendeur_id', 'vin_id', 'millesime_id', 'format_id', 'conditionnement_id', 'commentaires', 'date_maj', 'operations'];
+  displayedColumns = ['selection', 'id', 'partenaire', 'vin', 'millesime', 'format', 'conditionnement', 'commentaires', 'date_maj', 'operations'];
 
   constructor(private httpClient: HttpClient) {
     this.dataSource = new TableauOffresDataSource(httpClient);

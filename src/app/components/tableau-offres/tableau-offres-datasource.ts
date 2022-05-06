@@ -13,6 +13,7 @@ import { DataOffres } from './dataOffres';
  * (including sorting, pagination, and filtering).
  */
 export class TableauOffresDataSource extends DataSource<OffreAffiche> {
+
   public offres = new DataOffres(this.httpClient).getOffresAffiche();
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
@@ -28,6 +29,7 @@ export class TableauOffresDataSource extends DataSource<OffreAffiche> {
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<OffreAffiche[]> {
+
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
@@ -51,10 +53,14 @@ export class TableauOffresDataSource extends DataSource<OffreAffiche> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getPagedData(data: OffreAffiche[]): OffreAffiche[] {
+
     if (this.paginator) {
+
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
+
     } else {
+
       return data;
     }
   }
@@ -64,11 +70,14 @@ export class TableauOffresDataSource extends DataSource<OffreAffiche> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getSortedData(data: OffreAffiche[]): OffreAffiche[] {
+
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
+
     }
 
     return data.sort((a, b) => {
+      
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
         // case 'name': return compare(a.appellation, b.appellation, isAsc);

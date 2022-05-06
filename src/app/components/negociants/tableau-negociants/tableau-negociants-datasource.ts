@@ -82,7 +82,9 @@ export class TableauNegociantsDataSource extends DataSource<NegociantAffiche> {
     }
 
     return negociants.sort((a, b) => {
+      
       const isAsc = this.sort?.direction === 'asc';
+      
       switch (this.sort?.active) {
         case 'nom': return compare(a.nom, b.nom, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
