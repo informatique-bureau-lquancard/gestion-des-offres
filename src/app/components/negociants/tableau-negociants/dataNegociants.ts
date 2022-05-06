@@ -1,4 +1,3 @@
-import { formatDate } from "@angular/common";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Observable, Subject } from "rxjs";
@@ -21,8 +20,8 @@ export class DataNegociants implements OnDestroy {
     console.log("Passe dans constructor")
 
     if( DataNegociants.negociants != null ) {
-      console.log("Il y a déjà des éléments dans negociants");
-      console.log("Taille negociants !! : " + DataNegociants.negociants.length)
+      // console.log("Il y a déjà des éléments dans negociants");
+      // console.log("Taille negociants !! : " + DataNegociants.negociants.length)
       return;
     }
 
@@ -48,13 +47,13 @@ export class DataNegociants implements OnDestroy {
     this.initialisationBase();
 
     setTimeout(()=>{
-    console.log("3 Après getNegociants1 ");
+    // console.log("3 Après getNegociants1 ");
 
-    console.log(DataNegociants.negociantsBase);
+    // console.log(DataNegociants.negociantsBase);
 
     DataNegociants.negociantsBase.forEach(element => {
 
-      console.log("Element negociation base : " + element.nom);
+      // console.log("Element negociation base : " + element.nom);
     });
 
     this.init();
@@ -69,7 +68,7 @@ export class DataNegociants implements OnDestroy {
 
         response.forEach(element => {
 
-          console.log("Element base : " + element.nom);
+          // console.log("Element base : " + element.nom);
 
           DataNegociants.negociantsBase.push(
             new NegociantBase(
@@ -82,12 +81,12 @@ export class DataNegociants implements OnDestroy {
             )
           );
 
-          console.log("1 Taille negociants !! : " + DataNegociants.negociants.length);
+          // console.log("1 Taille negociants !! : " + DataNegociants.negociants.length);
 
         });
 
         // this.setNegociantsBase(response);
-        console.log("2 Taille negociants !! : " + DataNegociants.negociants.length);
+        // console.log("2 Taille negociants !! : " + DataNegociants.negociants.length);
       },
       (error: HttpErrorResponse) => {
         console.log("Erreurs !!")
@@ -108,15 +107,15 @@ export class DataNegociants implements OnDestroy {
 
   public init(): void {
 
-    console.log("Taille negociants base : " + DataNegociants.negociants.length);
+    // console.log("Taille negociants base : " + DataNegociants.negociants.length);
 
     //showAll(negociants : NegociantAffiche[]) : Fonctionnalité à déplacer !!!
     DataNegociants.negociantsBase.forEach(element => {
 
-      console.log("Element negociation base : " + element);
+      // console.log("Element negociation base : " + element);
     });
 
-    console.log("this.negociantsBase.length :" + DataNegociants.negociantsBase.length);
+    // console.log("this.negociantsBase.length :" + DataNegociants.negociantsBase.length);
 
     DataNegociants.negociantsBase.forEach(
       element => {
@@ -140,12 +139,12 @@ export class DataNegociants implements OnDestroy {
         );
       });
 
-    console.log("Taille negociants : " + DataNegociants.negociants.length);
+    // console.log("Taille negociants : " + DataNegociants.negociants.length);
 
     //showAll(negociants : NegociantAffiche[]) : Fonctionnalité à déplacer !!!
     DataNegociants.negociants.forEach(element => {
 
-      console.log(element);
+      // console.log(element);
     });
   }
 

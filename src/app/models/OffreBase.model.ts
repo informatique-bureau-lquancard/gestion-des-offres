@@ -1,4 +1,4 @@
-export class Offre {
+export class OffreBase {
 
     constructor (
                 public id: number,
@@ -10,8 +10,8 @@ export class Offre {
                 public millesime_id: number,
                 // public formatB: string,
                 public format_id : number,
-                public prix: number,
-                public quantite: number,
+                // public prix: number,
+                // public quantite: number,
                 // public conditionnement: string,
                 public conditionnement_id: number,
                 public commentaires: string,

@@ -22,7 +22,7 @@ export class TableauNegociantsComponent extends NegociantListComponent implement
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   // displayedColumns = ['id', 'negociantName', 'source', 'dateDerniereMAJ', 'bSelectionne'];
-  displayedColumns = ['id', 'negociantName', 'source', 'dateDerniereMAJ'];
+  displayedColumns = ['id', 'nom', 'source', 'dateDerniereMAJ'];
 
   constructor(protected negociantsService: NegociantsService, private httpClient: HttpClient) {
     super(negociantsService);

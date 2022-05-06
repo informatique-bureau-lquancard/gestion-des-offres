@@ -14,8 +14,6 @@ import { OffresService } from './offres.service';
 export class NegociantsService {
 
   public negociants = new DataNegociants(this.httpClient).getNegociantsAffiche();
-  
-  // public negociants = new TableauNegociantsDataSource(this.httpClient).negociants;
 
   negociantsSubject = new Subject<any[]>();
 
@@ -62,6 +60,13 @@ export class NegociantsService {
     this.emitNegociantsSubject;
 
     this.negociants[index].tableauOffres.forEach((element: number) => {
+
+      console.log("element selectionné " + element)
+
+      console.log("element selectionné " + this.offresService.getOffreById(element))
+
+      console.log("element selectionné " + this.offresService.getOffreById(element)?.id)
+
       this.offresService.getOffreById(element)?.setBSelectionne(true)
     });
 
