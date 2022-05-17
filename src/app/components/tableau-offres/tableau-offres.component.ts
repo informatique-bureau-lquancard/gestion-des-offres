@@ -32,12 +32,26 @@ export class TableauOffresComponent implements AfterViewInit {
     this.table.dataSource = this.dataSource;
   }
 
-  offreSelectionne!: OffreAffiche
+  // En prévision de pouvoir sélectionner plusieurs lignes afin de les envoyer dans un fichier
+  offresSelectionnes: OffreAffiche[] = []
 
   onSelectionnerLigne(offre: OffreAffiche) {
 
+    // console.log("offresSelectionnes : ")
+    // console.log(this.offresSelectionnes)
+
+    if( this.offresSelectionnes != [] && this.offresSelectionnes.includes(offre) ) {
+
+      let index = this.offresSelectionnes.indexOf(offre);
+      this.offresSelectionnes.splice(index);
+
+      // console.log("offresSelectionnes : ")
+      // console.log(this.offresSelectionnes)
+      return;
+    }
+
     this.onSelectionnerOffre(offre.id)
-    this.offreSelectionne = offre;
+    this.offresSelectionnes.push(offre);
     
   }
 

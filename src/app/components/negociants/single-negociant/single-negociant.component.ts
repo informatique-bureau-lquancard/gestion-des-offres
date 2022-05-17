@@ -51,6 +51,8 @@ export class SingleNegociantComponent implements OnInit {
   }
 
   onSelectionnerNegociant() {
+    console.log("10 onSelectionnerNegociant idRow : " + this.indexOfNegociant.toString())
+
     this.negociantsService.switchOnOne(this.indexOfNegociant);
   }
 

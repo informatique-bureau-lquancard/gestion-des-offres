@@ -28,6 +28,44 @@ export class OffresService {
     return offre;
   }
 
+  getTableauOffresByNom(partenaire: string){
+    console.log("///offres : " + this.offres);
+
+    let tableauOffres: number[] = [];
+
+    let offresAffiches : OffreAffiche[] = this.offres.filter((partenaire_filtre) => partenaire_filtre.partenaire == partenaire );
+
+    offresAffiches.forEach(offreAffiche => {
+
+      console.log("///offreAffiche.id : " + offreAffiche.id);
+
+      tableauOffres.push(offreAffiche.id);
+
+    });
+
+    console.log("///fin offres : " + this.offres);
+
+    return tableauOffres;
+  }
+
+  switchOffOne(index : number) {
+
+    if(this.getOffreById(index)?.bSelectionne == true) {
+      
+      this.switchOffOne(index);
+      return;
+    }
+
+    let offre : OffreAffiche | undefined = this.getOffreById(index);
+
+    if(offre) {
+      offre.bSelectionne = false;
+    }
+
+    // this.negociants[index].bSelectionne = false,
+    this.emitOffresSubject;
+  }
+
   emitOffresSubject() {
     this.offresSubject.next(this.offres.slice());
   }

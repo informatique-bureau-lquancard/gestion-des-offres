@@ -17,11 +17,12 @@ import { NegociantsService } from 'src/app/services/negociants.service';
 
 export class TableauNegociantsDataSource extends DataSource<NegociantAffiche> {
 
-  public negociants = new DataNegociants(this.httpClient).getNegociantsAffiche();
+  // public negociants = new DataNegociants(this.httpClient).getNegociantsAffiche();
+  public negociants = new DataNegociants(this.httpClient, this.negociantsService).getNegociantsAffiche();
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private negociantsService : NegociantsService) {
     super();
     console.log("TableauNegociantsDataSource");
   }

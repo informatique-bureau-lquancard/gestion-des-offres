@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { DataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 import { TableauNegociantsDataSource } from '../components/negociants/tableau-negociants/tableau-negociants-datasource';
 import { NegociantAffiche } from '../models/NegociantAffiche.model';
+import { OffreAffiche } from '../models/OffreAffiche.model';
 // import { dataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 import { OffresService } from './offres.service';
 
@@ -13,13 +14,17 @@ import { OffresService } from './offres.service';
 })
 export class NegociantsService {
 
-  public negociants = new DataNegociants(this.httpClient).getNegociantsAffiche();
+  public negociants = new DataNegociants(this.httpClient, this).getNegociantsAffiche();
 
   negociantsSubject = new Subject<any[]>();
 
-  constructor(private offresService: OffresService, private httpClient: HttpClient) { 
+  constructor(public offresService: OffresService, private httpClient: HttpClient) { 
     console.log("NegociantsService");
   }
+
+  // constructor(private offresService: OffresService, private httpClient: HttpClient) { 
+  //   console.log("NegociantsService");
+  // }
 
   getNegociantById(id: number){
     const negociant = this.negociants.find(
@@ -34,8 +39,12 @@ export class NegociantsService {
     for(let negociant of this.negociants) {
       negociant.bSelectionne = true,
 
-      negociant.tableauOffres.forEach((element: number) => {
-        this.offresService.getOffreById(element)?.setBSelectionne(true)
+      console.log("///negociant switchOnAll : " + negociant.nom)
+
+      negociant.tableauOffres.forEach((idOffre: number) => {
+
+        console.log("///idOffre switchOnAll : " + idOffre)
+        this.offresService.getOffreById(idOffre)?.setBSelectionne(true)
       });
 
     }
@@ -45,8 +54,9 @@ export class NegociantsService {
   switchOffAll(){
     for(let negociant of this.negociants) {
 
-      negociant.tableauOffres.forEach((element: number) => {
-        this.offresService.getOffreById(element)?.setBSelectionne(false)
+      negociant.tableauOffres.forEach((idOffre: number) => {
+
+        this.offresService.getOffreById(idOffre)?.setBSelectionne(false)
       });
 
       negociant.bSelectionne = false,
@@ -55,25 +65,35 @@ export class NegociantsService {
   }
 
   switchOnOne(index : number) {
+
+    if(this.getNegociantById(index)?.bSelectionne == true) {
+      
+      this.switchOffOne(index);
+      return;
+    }
+
     this.switchOffAll();
-    this.negociants[index].bSelectionne = true,
+
     this.emitNegociantsSubject;
 
-    this.negociants[index].tableauOffres.forEach((element: number) => {
+    this.getNegociantById(index)?.tableauOffres.forEach((idOffre: number) => {
 
-      console.log("element selectionné " + element)
-
-      console.log("element selectionné " + this.offresService.getOffreById(element))
-
-      console.log("element selectionné " + this.offresService.getOffreById(element)?.id)
-
-      this.offresService.getOffreById(element)?.setBSelectionne(true)
+      this.offresService.getOffreById(idOffre)?.setBSelectionne(true)
     });
 
   }
 
   switchOffOne(index : number) {
-    this.negociants[index].bSelectionne = false,
+
+    // this.getNegociantById(index)?.bSelectionne = false;
+
+    let negociant : NegociantAffiche | undefined = this.getNegociantById(index);
+
+    if(negociant) {
+      negociant.bSelectionne = false;
+    }
+
+    // this.negociants[index].bSelectionne = false,
     this.emitNegociantsSubject;
   }
 

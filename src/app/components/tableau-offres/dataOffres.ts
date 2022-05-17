@@ -6,6 +6,7 @@ import { Timestamp } from "rxjs/internal/operators/timestamp";
 import { tap } from "rxjs/operators";
 import { OffreAffiche } from "src/app/models/OffreAffiche.model";
 import { OffreBase } from "src/app/models/OffreBase.model";
+import { OffresService } from "src/app/services/offres.service";
 import { environment } from "src/environments/environment";
 
 const dateJour = new Date();
@@ -43,14 +44,15 @@ export class DataOffres implements OnDestroy {
 
   private initialisation() {
 
-    // DataOffres.offresBase = [
-    //   new OffreBase(1, "1", "1", 1, "1", 1, 1.1, "1", "1", dateJour, dateJour),
-    //   new OffreBase(2, "2", "2", 2, "2", 2, 2.2, "2", "2", dateJour, dateJour),
-    //   new OffreBase(3, "3", "3", 3, "3", 3, 3.3, "3", "3", dateJour, dateJour),
-    //   new OffreBase(4, "4", "4", 4, "4", 4, 4.4, "4", "4", dateJour, dateJour)
-    // ];
+    DataOffres.offresBase = [
+      new OffreBase(1, "2", "1", 1, "1", 1, 1.1, "1", "1", dateJour, dateJour),
+      new OffreBase(2, "2", "2", 2, "2", 2, 2.2, "2", "2", dateJour, dateJour),
+      new OffreBase(3, "2", "3", 3, "3", 3, 3.3, "3", "3", dateJour, dateJour),
+      new OffreBase(4, "2", "4", 4, "4", 4, 4.4, "4", "4", dateJour, dateJour),
+      new OffreBase(2, "5", "5", 5, "5", 5, 5.5, "5", "5", dateJour, dateJour)
+    ];
     
-    this.initialisationBase();
+    // this.initialisationBase();
 
     setTimeout(()=>{
     console.log("3 Après getNegociants1 ");
@@ -106,9 +108,7 @@ export class DataOffres implements OnDestroy {
         console.log("Erreurs !!")
         alert(error.message);
       }
-        
     )
-
   }
 
   getObservableNegociants(): Observable<OffreAffiche[]> {

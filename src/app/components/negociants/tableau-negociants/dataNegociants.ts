@@ -4,6 +4,7 @@ import { Observable, Subject } from "rxjs";
 import { tap } from "rxjs/operators";
 import { NegociantAffiche } from "src/app/models/NegociantAffiche.model";
 import { NegociantBase } from "src/app/models/NegociantBase.model";
+import { NegociantsService } from "src/app/services/negociants.service";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -16,7 +17,7 @@ export class DataNegociants implements OnDestroy {
 
   private apiServeurUrl = environment.apiServeurUrl;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private negociantsService : NegociantsService) {
     console.log("Passe dans constructor")
 
     if( DataNegociants.negociants != null ) {
@@ -37,14 +38,15 @@ export class DataNegociants implements OnDestroy {
 
   private initialisation() {
 
-    // DataNegociants.negociantsBase = [
-    //   new NegociantBase(1, 1, 1, "1", new Date(), new Date()),
-    //   new NegociantBase(2, 1, 1, "2", new Date(), new Date()),
-    //   new NegociantBase(3, 1, 1, "3", new Date(), new Date()),
-    //   new NegociantBase(2, 1, 1, "4", new Date(), new Date())
-    // ];
+    DataNegociants.negociantsBase = [
+      new NegociantBase(1, 1, 1, "1", new Date(), new Date()),
+      new NegociantBase(2, 2, 2, "2", new Date(), new Date()),
+      new NegociantBase(3, 1, 2, "3", new Date(), new Date()),
+      new NegociantBase(4, 1, 4, "4", new Date(), new Date()),
+      new NegociantBase(5, 5, 5, "5", new Date(), new Date())
+    ];
     
-    this.initialisationBase();
+    // this.initialisationBase();
 
     setTimeout(()=>{
     // console.log("3 Après getNegociants1 ");
@@ -124,6 +126,20 @@ export class DataNegociants implements OnDestroy {
           return;
         }
 
+        // DataNegociants.negociants.push(
+        //   new NegociantAffiche(
+        //     element.id,
+        //     Number(element.pays_id),
+        //     Number(element.type_partenaire_id),
+        //     element.nom,
+        //     "source",
+        //     element.date_maj,
+        //     element.date_crea,
+        //     false,
+        //     [2]
+        //   )
+        // );
+
         DataNegociants.negociants.push(
           new NegociantAffiche(
             element.id,
@@ -134,7 +150,7 @@ export class DataNegociants implements OnDestroy {
             element.date_maj,
             element.date_crea,
             false,
-            [2]
+            this.negociantsService.offresService.getTableauOffresByNom( element.nom )
           )
         );
       });

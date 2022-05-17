@@ -32,7 +32,7 @@ export class TableauNegociantsComponent extends NegociantListComponent implement
     //   console.log(element);
     // });
     
-    this.dataSource = new TableauNegociantsDataSource(httpClient);
+    this.dataSource = new TableauNegociantsDataSource(httpClient,negociantsService);
     // this.dataSource = new TableauNegociantsDataSource(httpClient, negociantsService);
   }
 
@@ -57,6 +57,9 @@ export class TableauNegociantsComponent extends NegociantListComponent implement
   }
 
   onSelectionnerNegociant(idRow: number) {
+
+    console.log("9 onSelectionnerNegociant idRow : " + idRow)
+
     this.negociantsService.switchOnOne(idRow);
   }
 
