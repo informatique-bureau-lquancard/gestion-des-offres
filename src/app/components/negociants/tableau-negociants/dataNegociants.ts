@@ -38,15 +38,15 @@ export class DataNegociants implements OnDestroy {
 
   private initialisation() {
 
-    DataNegociants.negociantsBase = [
-      new NegociantBase(1, 1, 1, "1", new Date(), new Date()),
-      new NegociantBase(2, 2, 2, "2", new Date(), new Date()),
-      new NegociantBase(3, 1, 2, "3", new Date(), new Date()),
-      new NegociantBase(4, 1, 4, "4", new Date(), new Date()),
-      new NegociantBase(5, 5, 5, "5", new Date(), new Date())
-    ];
+    // DataNegociants.negociantsBase = [
+    //   new NegociantBase(1, "1", "1", "1", new Date(), new Date()),
+    //   new NegociantBase(2, "2", "1", "MILLESIMA", new Date(), new Date()),
+    //   new NegociantBase(3, "1", "1", "MILLESIMA", new Date(), new Date()),
+    //   new NegociantBase(4, "1", "4", "4", new Date(), new Date()),
+    //   new NegociantBase(5, "5", "5", "5", new Date(), new Date())
+    // ];
     
-    // this.initialisationBase();
+    this.initialisationBase();
 
     setTimeout(()=>{
     // console.log("3 Après getNegociants1 ");
@@ -75,8 +75,8 @@ export class DataNegociants implements OnDestroy {
           DataNegociants.negociantsBase.push(
             new NegociantBase(
               element.id,
-              Number(element.pays_id),
-              Number(element.type_partenaire_id),
+              element.pays,
+              element.type_partenaire,
               element.nom,
               element.date_maj,
               element.date_crea
@@ -101,7 +101,7 @@ export class DataNegociants implements OnDestroy {
 
   getObservableNegociants(): Observable<NegociantAffiche[]> {
 
-    return this.httpClient.get<NegociantAffiche[]>(this.apiServeurUrl + `/partenaire/all`)
+    return this.httpClient.get<NegociantAffiche[]>(this.apiServeurUrl + `/partenaires_view/all`)
     .pipe(
       tap(data =>
         console.log('All: ' + JSON.stringify(data))));
@@ -129,8 +129,8 @@ export class DataNegociants implements OnDestroy {
         // DataNegociants.negociants.push(
         //   new NegociantAffiche(
         //     element.id,
-        //     Number(element.pays_id),
-        //     Number(element.type_partenaire_id),
+        //     element.pays,
+        //     element.type_partenaire,
         //     element.nom,
         //     "source",
         //     element.date_maj,
@@ -143,8 +143,8 @@ export class DataNegociants implements OnDestroy {
         DataNegociants.negociants.push(
           new NegociantAffiche(
             element.id,
-            Number(element.pays_id),
-            Number(element.type_partenaire_id),
+            element.pays,
+            element.type_partenaire,
             element.nom,
             "source",
             element.date_maj,

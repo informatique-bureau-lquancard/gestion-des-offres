@@ -101,20 +101,17 @@ export class NegociantsService {
      this.negociantsSubject.next(this.negociants.slice());
   }
 
-  saveNegociantsToServer() {
-    this.httpClient
-    .post('https://gestion-des-offres-default-rtdb.europe-west1.firebasedatabase.app//negociants', this.negociants)
-    .subscribe(
-      () => {
-        console.log('Enregistrement terminé !');
-      },
-      (error) => {
-        console.log('Erreur de sauvegarde ! ' + error);
-      }
-    )
-  }
-
-
-  
+  // saveNegociantsToServer() {
+  //   this.httpClient
+  //   .post('https://gestion-des-offres-default-rtdb.europe-west1.firebasedatabase.app//negociants', this.negociants)
+  //   .subscribe(
+  //     () => {
+  //       console.log('Enregistrement terminé !');
+  //     },
+  //     (error) => {
+  //       console.log('Erreur de sauvegarde ! ' + error);
+  //     }
+  //   )
+  // }
 
 }

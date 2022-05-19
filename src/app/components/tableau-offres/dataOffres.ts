@@ -44,15 +44,15 @@ export class DataOffres implements OnDestroy {
 
   private initialisation() {
 
-    DataOffres.offresBase = [
-      new OffreBase(1, "2", "1", 1, "1", 1, 1.1, "1", "1", dateJour, dateJour),
-      new OffreBase(2, "2", "2", 2, "2", 2, 2.2, "2", "2", dateJour, dateJour),
-      new OffreBase(3, "2", "3", 3, "3", 3, 3.3, "3", "3", dateJour, dateJour),
-      new OffreBase(4, "2", "4", 4, "4", 4, 4.4, "4", "4", dateJour, dateJour),
-      new OffreBase(2, "5", "5", 5, "5", 5, 5.5, "5", "5", dateJour, dateJour)
-    ];
+    // DataOffres.offresBase = [
+    //   new OffreBase(1, "2", "1", 1, "1", 1, 1.1, "1", "1", dateJour, dateJour),
+    //   new OffreBase(2, "2", "2", 2, "2", 2, 2.2, "2", "2", dateJour, dateJour),
+    //   new OffreBase(3, "2", "3", 3, "3", 3, 3.3, "3", "3", dateJour, dateJour),
+    //   new OffreBase(4, "2", "4", 4, "4", 4, 4.4, "4", "4", dateJour, dateJour),
+    //   new OffreBase(2, "5", "5", 5, "5", 5, 5.5, "5", "5", dateJour, dateJour)
+    // ];
     
-    // this.initialisationBase();
+    this.initialisationBase();
 
     setTimeout(()=>{
     console.log("3 Après getNegociants1 ");
@@ -113,7 +113,7 @@ export class DataOffres implements OnDestroy {
 
   getObservableNegociants(): Observable<OffreAffiche[]> {
 
-    return this.httpClient.get<OffreAffiche[]>(this.apiServeurUrl + `/offres_view/all`)
+    return this.httpClient.get<OffreAffiche[]>(this.apiServeurUrl + `/offres_view2/all`)
     .pipe(
       tap(data =>
         console.log('All: ' + JSON.stringify(data))));

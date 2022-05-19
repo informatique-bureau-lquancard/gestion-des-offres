@@ -52,8 +52,8 @@ export class NegociantListComponent implements OnInit {
     this.negociantsService.switchOffAll();
   }
 
-  onSave() {
-    this.negociantsService.saveNegociantsToServer();
-  }
+  // onSave() {
+  //   this.negociantsService.saveNegociantsToServer();
+  // }
 
 }
