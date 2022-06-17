@@ -44,6 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     );
   }
+  
   ngOnDestroy() {
     this.counterSubscription.unsubscribe();
   }

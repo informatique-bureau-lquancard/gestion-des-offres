@@ -4,7 +4,9 @@ import { NegociantsService } from 'src/app/services/negociants.service';
 @Component({
   selector: 'app-single-negociant',
   templateUrl: './single-negociant.component.html',
-  styleUrls: ['./single-negociant.component.scss']
+  styleUrls: ['./single-negociant.component.scss'],
+  //Améliore la rapidité en ne revérifiant pas l'objet
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class SingleNegociantComponent implements OnInit {

@@ -14,7 +14,18 @@ export class NegociantListComponent implements OnInit {
   negociants!: NegociantAffiche[];
   negociantSubscription!: Subscription;
 
-  constructor(protected negociantsService: NegociantsService) { }
+  constructor(protected negociantsService: NegociantsService) { 
+
+    // if (SingleCacheNegociant.getCache().length !== size) {
+    //   this.doAsyncListCandidate().then(() => {
+    //     SingleCacheNegociant.setCache(this.processedCandidates);
+    //   });
+    // } else {
+    //   // Get Cache
+    //   this.processedCandidates = SingleCacheNegociant.getCache();
+    // }
+
+  }
 
     // public getNegociants(): void {
   //   this.negociantsService.getNegociants().subscribe(

@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { DataNegociants } from '../components/negociants/tableau-negociants/dataNegociants';
 import { TableauNegociantsDataSource } from '../components/negociants/tableau-negociants/tableau-negociants-datasource';
 import { NegociantAffiche } from '../models/NegociantAffiche.model';
@@ -15,7 +15,7 @@ import { OffresService } from './offres.service';
 export class NegociantsService {
 
   public negociants = new DataNegociants(this.httpClient, this).getNegociantsAffiche();
-
+// Mettre ReplaySubject
   negociantsSubject = new Subject<any[]>();
 
   constructor(public offresService: OffresService, private httpClient: HttpClient) { 

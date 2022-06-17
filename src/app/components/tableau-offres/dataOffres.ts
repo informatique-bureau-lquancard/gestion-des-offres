@@ -12,7 +12,9 @@ import { environment } from "src/environments/environment";
 const dateJour = new Date();
 
 @Component({
-  template: ''
+  template: '',
+    //Améliore la rapidité en ne revérifiant pas l'objet
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataOffres implements OnDestroy {
 

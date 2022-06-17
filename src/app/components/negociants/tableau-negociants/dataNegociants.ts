@@ -8,7 +8,9 @@ import { NegociantsService } from "src/app/services/negociants.service";
 import { environment } from "src/environments/environment";
 
 @Component({
-  template: ''
+  template: '',
+  //Améliore la rapidité en ne revérifiant pas l'objet
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataNegociants implements OnDestroy {
 
